@@ -1,46 +1,41 @@
-## Put comments here that give an overall description of what your
-## functions do
 
-## Write a short comment describing this function
-
-makeCacheMatrix <- function(myx = matrix()) {
+# a set of functions to set and retrieve matrix
+makeCacheMatrix <- function(x = matrix()) {
   
-  invM <- NULL 
-  
+  inMtx <- NULL #initiate inMtx to NULL
+ 
   set <- function(y) {
-    myx <<- y 
-    invM <<- NULL 
+    x <<- y #overwrites the x value to y in parent environment
+    inMtx <<- NULL #set NULL value in parent environment
   }
   
-  get <- function() myx 
+  #return x value
+  get <- function() x 
   
-  setInv <- function(inverse) invM <<- inverse 
-  getInv <- function() return(invM) 
+  #
+  setInv <- function(inverse) inMtx <<- inverse #save inverse value as cache
+  getInv <- function() return(inMtx) #return cached value
+  
   return(list(set = set, get = get, setInv = setInv, getInv = getInv))
 }
 
 
 cacheSolve <- function(x, ...) {
   
-  answer <- x$getInv() # call from Cache value
-  
-  if(!is.null(answer)) { # check if the answer is Not NULL (present in Cache)
+  ans <- x$getInv() 
+ 
+   if(!is.null(ans)) { #check if it is not NULL
     
-    message("getting cached data") # indicate to user the value is from Cache
-    
-    return(answer) # return the answer
-    
+    message("getting cached data") 
+    return(ans) #return cached value of ans
   }
   
-  message("new Calculation")
+  message("new Calculation") #indicate it is not cached
   
-  data <- x$get() # retrieve the data
+  data <- x$get()  #fetch data
+  ans <- solve(data, ...) #inverse data
   
-  answer <- solve(data, ...) # calculate the inverse Matrix answer
-  
-  x$setInv(answer) # save the data to Cache
-  
-  # return the answer
-  return(answer)
+  x$setInv(ans) #save value as cache
+  return(ans)
   
 }
