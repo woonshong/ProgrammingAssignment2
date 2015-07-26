@@ -39,3 +39,23 @@ cacheSolve <- function(x, ...) {
   return(ans)
   
 }
+
+#sample running code
+#> source("cachematrix.R")
+#> myM <- matrix(c(4,2,7,6),2)
+#> myM
+#[,1] [,2]
+#[1,]    4    7
+#[2,]    2    6
+#> test <- makeCacheMatrix(myM)
+#> cacheSolve(test)
+#new Calculation
+#[,1] [,2]
+#[1,]  0.6 -0.7
+#[2,] -0.2  0.4
+#> cacheSolve(test)
+#getting cached data
+#[,1] [,2]
+#[1,]  0.6 -0.7
+#[2,] -0.2  0.4
+#> 
